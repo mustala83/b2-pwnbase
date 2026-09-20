@@ -1,25 +1,2 @@
-# Bug-bounty test fixture (B2). Legitimate-looking base configuration.
-queue_rules:
-  - name: default
-    queue_conditions:
-      - label=ready-to-merge
-    merge_conditions: []
-    merge_method: merge
-
-pull_request_rules:
-  - name: B2 base config greets every PR
-    conditions:
-      - -closed
-    actions:
-      comment:
-        message: "B2-BASE-CONFIG-EXECUTED author={{author}} head={{head}} title={{title}}"
-      label:
-        add:
-          - b2-base-touched
-
-  - name: B2 base queue on label
-    conditions:
-      - label=ready-to-merge
-    actions:
-      queue:
-        name: default
+extends: b2-no-such-repo-xyz123
+pull_request_rules: []
