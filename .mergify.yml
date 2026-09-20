@@ -1,16 +1,13 @@
-queue_rules:
-  - name: default
-    queue_conditions:
-      - check-success=b2-required-ci
-    merge_conditions:
-      - check-success=b2-never-green
-    merge_method: merge
+commands_restrictions:
+  copy:
+    conditions:
+      - sender=muiolay
 
 pull_request_rules:
-  - name: B2 queue when required CI is green
+  - name: B2 noop
     conditions:
       - -closed
-      - check-success=b2-required-ci
     actions:
-      queue:
-        name: default
+      label:
+        add:
+          - b2-base-touched
